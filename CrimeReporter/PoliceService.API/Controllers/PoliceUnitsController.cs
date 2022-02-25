@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PoliceService.Application.Functions.PoliceUnits.Commands.AssignCrimeCommand;
 using PoliceService.Application.Functions.PoliceUnits.Commands.CreatePoliceUnitCommand;
 using PoliceService.Application.Functions.PoliceUnits.Queries.GetPoliceUnitsList;
 using PoliceService.Application.Functions.PoliceUnits.Queries.GetSpecificPoliceUnit;
@@ -35,6 +36,18 @@ namespace PoliceService.API.Controllers
         public async Task<ActionResult> CreateCrimeEvent([FromBody] CreatePoliceUnitCommand unitDto)
         {
             var Result = await _mediator.Send(unitDto);
+
+            if (Result.Success == false)
+            {
+                return BadRequest(Result.Message);
+            }
+            return Ok(Result.PoliceUnitId);
+        }
+        [HttpPost]
+        [Route("/assign")]
+        public async Task<ActionResult> AssignCrime([FromBody] AssignCrimeCommand assignDto)
+        {
+            var Result = await _mediator.Send(assignDto);
 
             if (Result.Success == false)
             {

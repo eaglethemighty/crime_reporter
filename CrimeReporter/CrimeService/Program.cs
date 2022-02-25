@@ -2,13 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using CrimeService.Data.DAL;
 using CrimeService.Data.Repository;
 using CrimeService.Controllers;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ILogger>(provider =>
    provider.GetRequiredService<Microsoft.Extensions.Logging.ILogger<CrimeEventsController>>());
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+        .AddJsonOptions(x =>
+        {
+            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        }); ;
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

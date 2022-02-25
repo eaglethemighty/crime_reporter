@@ -7,10 +7,10 @@ namespace PoliceService.Application.Functions.PoliceUnits.Commands.CreatePoliceU
 {
     public class CreatePoliceUnitCommandHandler : IRequestHandler<CreatePoliceUnitCommand, CreatePoliceUnitResponse>
     {
-        private readonly IAsyncRepository<PoliceUnit> _policeUnitRepository;
+        private readonly IPoliceUnitRepository _policeUnitRepository;
         private readonly IMapper _mapper;
 
-        public CreatePoliceUnitCommandHandler(IAsyncRepository<PoliceUnit> policeUnitRepository, IMapper mapper)
+        public CreatePoliceUnitCommandHandler(IPoliceUnitRepository policeUnitRepository, IMapper mapper)
         {
             _policeUnitRepository = policeUnitRepository ?? throw new ArgumentNullException(nameof(policeUnitRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

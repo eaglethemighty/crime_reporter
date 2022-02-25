@@ -7,7 +7,7 @@ using System.Security.Authentication;
 
 namespace PoliceService.Persistence.Repositories
 {
-    public class PoliceUnitRepository : IAsyncRepository<PoliceUnit>
+    public class PoliceUnitRepository : IPoliceUnitRepository
     {
 
         private readonly MongoClient _mongoClient;
@@ -68,6 +68,7 @@ namespace PoliceService.Persistence.Repositories
         {
             return Task.Run(() =>
             {
+                entity.Id = ObjectId.GenerateNewId().ToString();
                 var PoliceUnits = _mongoClient.GetDatabase(_policeUnitDatabaseSettings.DatabaseName).GetCollection<PoliceUnit>(_policeUnitDatabaseSettings.CollectionName);
                 PoliceUnits.InsertOne(entity);
             });
@@ -122,6 +123,21 @@ namespace PoliceService.Persistence.Repositories
         public Task<bool> SaveAsync()
         {
             return Task.FromResult(true);
+        }
+
+        public Task<bool> TryAssignCrime(string unitId, Guid crimeId)
+        {
+            return Task.Run(() =>
+            {
+                PoliceUnit? UnitWithId = GetByIdAsync(unitId).Result;
+                if (UnitWithId is null)
+                {
+                    return false;
+                }
+                UnitWithId.AssignedEvents.Add(crimeId);
+                EditAsync(UnitWithId).RunSynchronously();
+                return true;
+            });
         }
     }
 }

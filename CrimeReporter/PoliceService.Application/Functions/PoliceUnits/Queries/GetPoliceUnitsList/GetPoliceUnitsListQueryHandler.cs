@@ -8,9 +8,9 @@ namespace PoliceService.Application.Functions.PoliceUnits.Queries.GetPoliceUnits
 
     public class GetPoliceUnitsListQueryHandler : IRequestHandler<GetPoliceUnitsListQuery, List<PoliceUnitReadDto>>
     {
-        private readonly IAsyncRepository<PoliceUnit> _policeUnitRepository;
+        private readonly IPoliceUnitRepository _policeUnitRepository;
         private readonly IMapper _mapper;
-        public GetPoliceUnitsListQueryHandler(IAsyncRepository<PoliceUnit> policeUnitRepository, IMapper mapper)
+        public GetPoliceUnitsListQueryHandler(IPoliceUnitRepository policeUnitRepository, IMapper mapper)
         {
             _policeUnitRepository = policeUnitRepository ?? throw new ArgumentNullException(nameof(policeUnitRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
