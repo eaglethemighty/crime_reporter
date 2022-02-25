@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+    crimeservice:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - "5000:80"
+        depends_on:
+        - sql_db
+
+    policeservice.api:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - "5001:80"
+
+    sql_database:
+        container_name: sql_database
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: "pa55word!"
+            ACCEPT_EULA: "Y"
+        volumes:
+            - sql_volume:/var/opt/mssql/data
+
+    mongo_database:
+        container_name: mongo_database
+        ports:
+            - "27017:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=admin
+            - MONGO_INITDB_DATABASE=PoliceUnitsDb
+            - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+            
+        volumes:
+            - mongo_volume:/data/db
+
+

@@ -4,19 +4,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:47290",
+      "applicationUrl": "http://localhost:34111",
       "sslPort": 0
     }
   },
   "profiles": {
-    "PoliceService": {
+    "PoliceService.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5215",
+      "applicationUrl": "http://localhost:5153",
       "dotnetRunMessages": true
     },
     "IIS Express": {

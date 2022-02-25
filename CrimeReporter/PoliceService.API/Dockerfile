@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["PoliceService/PoliceService.csproj", "PoliceService/"]
-RUN dotnet restore "PoliceService/PoliceService.csproj"
+COPY ["PoliceService.API/PoliceService.API.csproj", "PoliceService.API/"]
+RUN dotnet restore "PoliceService.API/PoliceService.API.csproj"
 COPY . .
-WORKDIR "/src/PoliceService"
-RUN dotnet build "PoliceService.csproj" -c Release -o /app/build
+WORKDIR "/src/PoliceService.API"
+RUN dotnet build "PoliceService.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "PoliceService.csproj" -c Release -o /app/publish
+RUN dotnet publish "PoliceService.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "PoliceService.dll"]
+ENTRYPOINT ["dotnet", "PoliceService.API.dll"]
