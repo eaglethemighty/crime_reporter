@@ -15,7 +15,7 @@ namespace PoliceService.Application.HttpClients
 
         public async Task<bool> TryAssignUnit(CrimeAssignViewModel model)
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"http://crimeservice:80/crimes/assign/?crimeId={model.crimeId}&unitId={model.unitId}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"http://crimeservice:80/crimes/assign/?crimeId={model.crimeId}&unitId={model.unitId}");
             var response = await _httpClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
