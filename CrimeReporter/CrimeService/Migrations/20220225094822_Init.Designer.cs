@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrimeService.Migrations
 {
     [DbContext(typeof(DbAccess))]
-    [Migration("20220222153542_CreateCrimeTableWithDataSeeded")]
-    partial class CreateCrimeTableWithDataSeeded
+    [Migration("20220225094822_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,8 +38,9 @@ namespace CrimeService.Migrations
                     b.Property<int>("EventType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("LawEnforcementId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("LawEnforcement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()

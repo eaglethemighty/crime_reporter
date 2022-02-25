@@ -36,8 +36,9 @@ namespace CrimeService.Migrations
                     b.Property<int>("EventType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("LawEnforcementId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("LawEnforcement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()

@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using PoliceService.Application.Contracts.Persistence;
+using PoliceService.Application.Functions.PoliceUnits.Commands.AssignCrimeCommand;
 using PoliceService.Domain.Entities;
 using System.Security.Authentication;
 
@@ -125,17 +126,21 @@ namespace PoliceService.Persistence.Repositories
             return Task.FromResult(true);
         }
 
-        public Task<bool> TryAssignCrime(string unitId, Guid crimeId)
+        public Task<bool> TryAssignCrime(CrimeAssignViewModel model)
         {
             return Task.Run(() =>
             {
-                PoliceUnit? UnitWithId = GetByIdAsync(unitId).Result;
+                PoliceUnit? UnitWithId = GetByIdAsync(model.unitId).Result;
                 if (UnitWithId is null)
                 {
                     return false;
                 }
-                UnitWithId.AssignedEvents.Add(crimeId);
-                EditAsync(UnitWithId).RunSynchronously();
+                if (UnitWithId.AssignedEvents is null)
+                {
+                    UnitWithId.AssignedEvents = new();
+                }
+                UnitWithId.AssignedEvents.Add(model.crimeId);
+                EditAsync(UnitWithId);
                 return true;
             });
         }

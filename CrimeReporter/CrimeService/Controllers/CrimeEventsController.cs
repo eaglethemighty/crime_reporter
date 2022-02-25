@@ -46,5 +46,24 @@ namespace CrimeService.Controllers
             CrimeEventReadDto CrimeInReadFormat = _mapper.Map<CrimeEventReadDto>(CrimeFromUser);
             return CreatedAtRoute(nameof(GetSpecificCrimeEvent), new { Id = CrimeInReadFormat.Id }, CrimeInReadFormat);
         }
+        [Route("assign")]
+        [HttpPost]
+        public async Task<ActionResult> AssignUnitToEvent([FromQuery] CrimeAssignViewModel requestModel)
+        {
+            Console.WriteLine(requestModel.unitId);
+            Console.WriteLine(requestModel.crimeId);
+            var Crime = await _crimeRepository.GetByIdAsync(requestModel.crimeId);
+            if (Crime is null)
+            {
+                return BadRequest();
+            }
+            if (Crime.LawEnforcement != String.Empty)
+            {
+                return BadRequest();
+            }
+            Crime.LawEnforcement = requestModel.unitId;
+            await _crimeRepository.SaveAsync();
+            return Ok();
+        }
     }
 }

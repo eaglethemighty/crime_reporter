@@ -6,7 +6,7 @@ namespace PoliceService.Domain.Entities
     {
         public string Id { get; set; }
         public PoliceUnitRank Rank { get; set; }
-        public List<Guid> AssignedEvents { get; set; }
+        public List<Guid> AssignedEvents { get; set; } = new();
     }
     public enum PoliceUnitRank
     {

@@ -64,7 +64,7 @@ namespace CrimeService.Data.DAL
                 Description = "Someone broke into the codecool facilities in order to steal exam details",
                 ReporterEmail = "abcdef@gmail.com",
                 Status = CrimeStatus.Waiting,
-                LawEnforcementId = "621888d6851ced5aa9518dbb"
+                LawEnforcement = "621888d6851ced5aa9518dbb"
             });
 
             CrimeEventList.Add(new CrimeEvent()
@@ -75,7 +75,7 @@ namespace CrimeService.Data.DAL
                 Description = "Someone seems to have lost 10-0 in table soccer and appears to be dead.",
                 ReporterEmail = "asdf@gmail.com",
                 Status = CrimeStatus.Declined,
-                LawEnforcementId = "621888dc851ced5aa9518dbc"
+                LawEnforcement = "621888dc851ced5aa9518dbc"
             });
 
             CrimeEventList.Add(new CrimeEvent()
@@ -86,7 +86,7 @@ namespace CrimeService.Data.DAL
                 Description = "A group of masked and armed individuals broke into the local casino",
                 ReporterEmail = "qwerty@gmail.com",
                 Status = CrimeStatus.Finished,
-                LawEnforcementId = "621888de851ced5aa9518dbd"
+                LawEnforcement = "621888de851ced5aa9518dbd"
             });
 
 

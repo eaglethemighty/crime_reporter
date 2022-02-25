@@ -12,5 +12,6 @@ namespace CrimeService.Data.DTOs
         [EmailAddress]
         public string ReporterEmail { get; set; }
         public CrimeStatus Status { get; set; } = CrimeStatus.Waiting;
+        public string LawEnforcement { get; set; } = "";
     }
 }

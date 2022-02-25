@@ -10,6 +10,6 @@ namespace CrimeService.Data.DTOs
         public string Location { get; set; }
         public string ReporterEmail { get; set; }
         public CrimeStatus Status { get; set; } = CrimeStatus.Waiting;
-        public Guid? LawEnforcementId { get; set; }
+        public string LawEnforcement { get; set; }
     }
 }

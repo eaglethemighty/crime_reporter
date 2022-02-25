@@ -43,8 +43,7 @@ namespace PoliceService.API.Controllers
             }
             return Ok(Result.PoliceUnitId);
         }
-        [HttpPost]
-        [Route("/assign")]
+        [HttpPost("/assign")]
         public async Task<ActionResult> AssignCrime([FromBody] AssignCrimeCommand assignDto)
         {
             var Result = await _mediator.Send(assignDto);

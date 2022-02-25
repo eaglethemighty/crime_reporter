@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CrimeService.Migrations
 {
-    public partial class CreateCrimeTableWithDataSeeded : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,7 @@ namespace CrimeService.Migrations
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReporterEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    LawEnforcementId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    LawEnforcement = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

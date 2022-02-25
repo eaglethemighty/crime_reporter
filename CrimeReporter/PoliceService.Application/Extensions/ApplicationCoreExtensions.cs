@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using PoliceService.Application.Behaviours;
 using PoliceService.Application.Functions.PoliceUnits.Queries.GetPoliceUnitsList;
+using PoliceService.Application.HttpClients;
 using System.Reflection;
 
 namespace PoliceService.Application.Extensions
@@ -13,8 +15,9 @@ namespace PoliceService.Application.Extensions
             services.AddMediatR(typeof(GetPoliceUnitsListQueryHandler).Assembly);
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddHttpClient<IHttpCrimeClient, CrimeHttpClient>();
 
-            // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExceptionHandler<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExceptionHandler<,>));
 
             return services;
         }
