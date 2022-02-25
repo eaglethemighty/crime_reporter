@@ -12,7 +12,7 @@ namespace CrimeService.Models
         [EmailAddress]
         public string ReporterEmail { get; set; }
         public CrimeStatus Status { get; set; } = CrimeStatus.Waiting;
-        public string LawEnforcementId { get; set; }
+        public string LawEnforcementId { get; set; } = "";
     }
     public enum CrimeEventType
     {
